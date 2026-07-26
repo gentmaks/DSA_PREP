@@ -1,18 +1,19 @@
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        cache = {}
-        def dp(i, j):
-            if i == len(matrix):
-                return 0
-            if j < 0 or j >= len(matrix[0]):
-                return float("inf")
-            if (i, j) in cache:
-                return cache[(i, j)]
-            res = matrix[i][j]
-            res += min(dp(i+1, j), dp(i+1, j+1), dp(i+1, j-1))
-            cache[(i, j)] = res
-            return res
+        rows = cols = len(matrix)
         res = float("inf")
-        for col in range(len(matrix[0])):
+        memo = {}
+        def dp(r, c):
+            if (r, c) in memo:
+                return memo[(r, c)]
+            if r == rows:
+                return 0
+            if c < 0 or c >= cols:
+                return float("inf")
+            res = matrix[r][c]
+            res += min(dp(r + 1, c), dp(r + 1, c + 1), dp(r + 1, c - 1))
+            memo[(r, c)] = res
+            return res
+        for col in range(cols):
             res = min(res, dp(0, col))
         return res

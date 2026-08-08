@@ -1,0 +1,9 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        cmin = cmax = 0
+        for paren in s:
+            cmax = cmax - 1 if paren == ")" else cmax + 1
+            cmin = cmin + 1 if paren == "(" else max(cmin - 1, 0)
+            if cmax < 0:
+                return False
+        return not cmin

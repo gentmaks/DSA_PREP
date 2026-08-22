@@ -7,17 +7,17 @@ class Solution:
             return True
         bound = maxChoosableInteger
         memo = {}
-        def dp(mask, tally):
-            if tally <= 0:
+        def dp(mask, left):
+            if left <= 0:
                 return False
             if mask not in memo:
                 for i in range(1, bound + 1):
                     if not (mask & (1 << i - 1)):
-                        if i >= tally:
+                        if i >= left:
                             memo[mask] = True
                             return True
                         else:
-                            if not dp(mask | (1 << i - 1), tally - i):
+                            if not dp(mask | (1 << i - 1), left - i):
                                 memo[mask] = True
                                 return True
                             else:

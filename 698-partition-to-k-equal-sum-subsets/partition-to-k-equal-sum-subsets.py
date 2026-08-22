@@ -20,8 +20,6 @@ class Solution:
                     if curr_sum + nums[i] <= bucket_target and dp(mask | (1 << i)):
                         memo[mask] = True
                         return True
-                    else:
-                        memo[mask] = False
             memo[mask] = False
             return memo[mask]
         return dp(0)

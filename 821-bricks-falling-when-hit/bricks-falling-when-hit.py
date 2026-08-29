@@ -48,7 +48,6 @@ class Solution:
                         uf.union(r* cols + c, rr * cols + cc)
 
         # number of bricks each turn
-        print(f"rows: {rows}, cols: {cols}")
         res = []
         prev = uf.get_size(rows * cols)
         for r, c in reversed(hits):
@@ -59,7 +58,6 @@ class Solution:
                 for rr, cc in (r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1):
                     if rr < 0 or rr >= rows or cc < 0 or cc >= cols or not grid[rr][cc]:
                         continue
-                    print(f"first: {r * rows + c}, second: {rr * rows + cc}")
                     uf.union(r * cols + c, rr * cols + cc)
                 size = uf.get_size(rows * cols)
                 res.append(max(0, size - prev - 1))

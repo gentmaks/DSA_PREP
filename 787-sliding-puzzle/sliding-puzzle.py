@@ -1,5 +1,6 @@
 class Solution:
     moves = {"123450": 0}
+    states = ["123450"]
     adj = [
         [1, 3],
         [0, 2, 4],
@@ -8,12 +9,11 @@ class Solution:
         [1, 3, 5],
         [2, 4]
     ]
-    states = ["123450"]
     for s in states:
         z = s.find("0")
         for a in adj[z]:
             S = list(s)
-            S[z], S[a] = S[a], S[z]
+            S[a], S[z] = S[z], S[a]
             n = "".join(S)
             if n in moves:
                 continue

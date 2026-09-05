@@ -9,7 +9,7 @@ class Solution:
             key = (i, prev)
             if key in memo:
                 return memo[key]
-            # case 1 is keep current digit as is
+            # case 1 is keep current digit as previous (mirror prev)
             keep = (digits[i] != prev) + dp(i + 1, prev)
             # case 2 is switch the current digit
             switch = float("inf")

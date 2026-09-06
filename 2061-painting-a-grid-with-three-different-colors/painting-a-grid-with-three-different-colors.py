@@ -17,6 +17,7 @@ class Solution:
                 populate_valid_cols(current)
                 current.pop()
         populate_valid_cols(tmp_cols)
+        print(f"for row size: {m}, column count is: {len(valid_cols)}")
         @lru_cache(None)
         def dp(col_idx, prev_col):
             """
@@ -28,10 +29,11 @@ class Solution:
 
             total = 0
             for curr_col in valid_cols:
+                valid = True
                 for row in range(m):
                     if curr_col[row] == prev_col[row]:
+                        valid = False
                         break
-                else:
-                    total += dp(col_idx + 1, curr_col)
+                total += dp(col_idx + 1, curr_col) if valid else 0
             return total
         return dp(0, "0" * m) % MOD

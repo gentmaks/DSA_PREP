@@ -2,18 +2,21 @@ class Solution:
     def colorTheGrid(self, m: int, n: int) -> int:
         MOD = 10 **9 + 7
         valid_cols = []
+        tmp_cols = []
         def populate_valid_cols(current):
             """
             backtracking to generate all valid columns combinations
             """
             if len(current) == m:
-                valid_cols.append(current)
+                valid_cols.append("".join(current))
                 return
             for color in "123":
                 if current and current[-1] == color:
                     continue
-                populate_valid_cols(current + color)
-        populate_valid_cols("")
+                current.append(color)
+                populate_valid_cols(current)
+                current.pop()
+        populate_valid_cols(tmp_cols)
         @lru_cache(None)
         def dp(col_idx, prev_col):
             """

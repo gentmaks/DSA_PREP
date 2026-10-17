@@ -1,7 +1,5 @@
 class Solution:
     def fullBloomFlowers(self, flowers: List[List[int]], people: List[int]) -> List[int]:
-        lo = min(flowers, key = lambda x: x[0])[0]
-        hi = max(flowers, key = lambda x: x[1])[1]
         res = [None] * len(people)
         events = []
         flower_count = 0

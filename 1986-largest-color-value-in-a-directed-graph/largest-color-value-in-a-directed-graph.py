@@ -1,13 +1,13 @@
 class Solution:
     def largestPathValue(self, colors: str, edges: list[list[int]]) -> int:
-        n = len(colors)
         graph = collections.defaultdict(list)
         indegree = collections.defaultdict(int)
         for v1, v2 in edges:
             graph[v1].append(v2)
-            indegree[v2] += 1 
-        dp = [[0] * 26 for _ in range(n)]
+            indegree[v2] += 1
         q = collections.deque()
+        n = len(colors)
+        dp = [[0] * 26 for _ in range(n)]
         for i in range(n):
             if not indegree[i]:
                 q.append(i)

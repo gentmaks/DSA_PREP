@@ -16,6 +16,7 @@ class Solution:
                         best,
                         prices[i] + dp(i + 1, left - 1, False)
                     )
+            # case where we buy the stock
             else:
                 if left:
                     best = max(

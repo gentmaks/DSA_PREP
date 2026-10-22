@@ -1,20 +1,20 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = collections.defaultdict(list)
-        indegrees = collections.defaultdict(int)
-        for crs, pre in prerequisites:
-            graph[pre].append(crs)
-            indegrees[crs] += 1
+        indegree = collections.defaultdict(int)
+        for post, pre in prerequisites:
+            graph[pre].append(post)
+            indegree[post] += 1
         q = collections.deque()
-        for i in range(numCourses):
-            if not indegrees[i]:
-                q.append(i)
-        res = []
+        for course in range(numCourses):
+            if not indegree[course]:
+                q.append(course)
+        ordering = []
         while q:
-            curr = q.popleft()
-            res.append(curr)
-            for nei in graph[curr]:
-                indegrees[nei] -= 1
-                if not indegrees[nei]:
+            curr_course = q.popleft()
+            ordering.append(curr_course)
+            for nei in graph[curr_course]:
+                indegree[nei] -= 1
+                if not indegree[nei]:
                     q.append(nei)
-        return res if len(res) == numCourses else []
+        return ordering if len(ordering) == numCourses else []
